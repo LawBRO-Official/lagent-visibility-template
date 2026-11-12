@@ -1,0 +1,43 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "lagent-visibility-template",
+	"main": "./src/worker/index.ts",
+	"compatibility_date": "2025-10-08",
+	"upload_source_maps": true,
+	"observability": {
+		"enabled": true
+	},
+	"assets": {
+		"directory": "./dist/client",
+		"not_found_handling": "single-page-application",
+		"run_worker_first": [
+			"/.well-known/web-bot-auth/*",
+			"/api",
+			"/api/*",
+			"/index.json",
+			"/jsonld",
+			"/llms-full.txt",
+			"/llms.txt",
+			"/robots.txt",
+			"/*.jsonld",
+			"/*.md"
+		]
+	},
+	"ai": {
+		"binding": "AI"
+	},
+	"kv_namespaces": [
+		{
+			"binding": "VISIBILITY_CACHE",
+			"id": "b60300ae81814eaaa7ab28a52dda343b"
+		}
+	],
+	"vars": {
+		"SITE_NAME": "LawBRO",
+		"SITE_DESCRIPTION": "LawBRO is a premier digital legal-tech and compliance platform designed to make legal, tax, trademark, and business services accessible, affordable, and transparent for individuals, startups, enterprises, and non-resident Indians (NRIs). Connecting users with qualified advocates, chartered accountants, and legal professionals across hundreds of cities, the platform offers a comprehensive ecosystem covering multiple core service verticals.",
+		"AI_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+		"ENRICHMENT_CACHE_TTL": "3600",
+		"CONTENT_SIGNAL": "ai-input=yes, search=yes, ai-train=no",
+		"ENABLE_WEB_BOT_AUTH": "false"
+	}
+}
